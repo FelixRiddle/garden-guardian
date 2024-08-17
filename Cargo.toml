@@ -1,0 +1,13 @@
+[package]
+name = "green-eye"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chrono = "0.4.38"
+image = "0.25.2"
+sea-orm = "1.0.0"
+
+[dependencies.tokio]
+version = "1.39.3"
+features = ["full"]
