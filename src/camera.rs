@@ -1,21 +1,45 @@
-// use image::{RgbImage, Rgb};
-// use num::traits::Float;
-// use std::fs;
-// use std::io::{Write, BufWriter};
-// use chrono::{DateTime, Local};
+use image::RgbImage;
+use chrono::{Local, Utc};
 
-// /// Take a photo
-// /// 
-// /// 
-// pub async fn take_photo() {
-//     // Save image to file
-//     let date = Local::now().format("%Y-%m-%d").to_string();
-//     let file_name = format!("{} {}.jpg", date, Local::now().format("%H-%M-%S").to_string());
-//     let path = format!("images/{}", file_name);
-//     image.save(path).unwrap();
-    
-//     // Save data to CSV file
-//     let data = format!("{}, {}, {}\n", date, Local::now().format("%H:%M:%S").to_string(), chlorophyll_index);
-//     let mut file = BufWriter::new(fs::OpenOptions::new().append(true).open("data.csv").unwrap());
-//     file.write_all(data.as_bytes()).unwrap();
-// }
+/// Define a public struct representing a camera
+/// 
+/// 
+pub struct Camera {
+    pub name: String,
+    pub model: String,
+    pub resolution: (u32, u32), // width, height
+    pub image: RgbImage,
+}
+
+impl Camera {
+    /// Create a new camera instance
+    /// 
+    /// 
+    pub fn new(name: String, model: String, resolution: (u32, u32)) -> Self {
+        Self {
+            name,
+            model,
+            resolution,
+            image: RgbImage::new(resolution.0, resolution.1),
+        }
+    }
+
+    /// Take a photo using the camera
+    /// 
+    /// 
+    pub async fn take_photo(&mut self) {
+        // TODO: implement device detection and photo taking
+    }
+
+    /// Save the photo to a file
+    /// 
+    /// 
+    pub fn save_photo(&self) -> String {
+        let local_date = Local::now();
+        let utc_date = local_date.with_timezone(&Utc);
+        let file_name = format!("{}.jpg", utc_date.format("%Y-%m-%d-%H-%M-%S").to_string());
+        let path = format!("images/{}", file_name);
+        self.image.save(path.clone()).unwrap();
+        path
+    }
+}
