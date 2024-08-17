@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 chrono = "0.4.38"
 image = "0.25.2"
+num = "0.4.3"
 sea-orm = "1.0.0"
 
 [dependencies.tokio]

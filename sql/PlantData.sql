@@ -1,0 +1,6 @@
+CREATE TABLE plant_data (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    image_path VARCHAR(255) NOT NULL,
+    chlorophyll_index FLOAT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
