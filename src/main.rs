@@ -8,9 +8,15 @@ pub mod camera;
 pub mod chlorophyll;
 pub mod db;
 pub mod photo;
+pub mod settings;
 
 #[tokio::main]
 async fn main() {
+    let settings = settings::Settings::new();
+    if !settings.gstreamer_supported {
+        println!("WARNING: GStreamer is not supported.");
+    }
+    
     let mut interval = interval(Duration::from_secs(3600)); // 3600 seconds = 1 hour
     
     loop {
